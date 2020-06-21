@@ -1,0 +1,119 @@
+body{
+	background-color: #131313;
+	font-family: 'Roboto', sans-serif;
+}
+
+.logo{
+	font-family: 'Roboto Mono', monospace ;
+	color: #fff;
+	font-size: 25px;
+	z-index: 20;
+	cursor: pointer;
+}
+h2{
+	font-size: 40px;
+	font-weight: 500;
+	color: #fff;
+	margin-top: 0;
+	margin-bottom: 50px;
+}
+.grey-txt{
+	color: #8B8B8B;
+	font-size: 16px;
+	font-weight: 400;
+	margin-bottom: 30px;
+}
+nav:before{
+	display: none;
+}
+.good-small-row{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	align-items: center;
+}
+.price{
+	font-size: 25px;
+	color: #fff;
+	margin-bottom: 0;
+	margin-top: 0;
+	min-height: inherit;
+}
+.good-imgbox{
+	height: 360px;
+	width: 100%;
+	background-color: #252525;
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	transition: all .3s ease-in-out;
+}
+.sale-price{
+	color: #8B8B8B;
+	text-decoration: line-through;
+	font-size: 20px;
+	font-weight: 300;
+}
+
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet{
+	background: #9d7044!important;
+}
+
+
+
+
+/*ADAPTIIIIIIIIIV*/
+
+
+@media (max-width: 1199px) {
+	
+}
+@media (max-width: 991px) {
+	
+}
+@media (max-width: 786px) {
+
+}
+@media (max-width: 767px) {
+ 	
+}
+@media (max-width: 672px) {
+	
+}
+@media (max-width: 512px) {
+
+}
+@media (max-width: 390px) {
+	
+}
+@media (max-width: 320px) {
+	
+}
+
+
+
+
+
+/* Remove outline on the forms and links */ 
+:active, :hover, :focus { 
+outline: 0; 
+outline-offset: 0; 
+}
+
+button:active, button:hover, button:focus { 
+outline: 0; 
+outline-offset: 0; 
+}
+
+
+a{
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: none;
+}
+a:focus{
+	text-decoration: none;
+}
