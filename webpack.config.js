@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var ImageminPlugin = require('imagemin-webpack-plugin').default
 const TerserPlugin = require('terser-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader')
 
@@ -36,7 +37,8 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]?[hash]'
+          name: '[name].[ext]?[hash]',
+          esModule: false
         }
       }
     ]
@@ -83,6 +85,11 @@ if (process.env.NODE_ENV === 'production') {
       }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
+    }),
+    new ImageminPlugin({
+      pngquant: {
+        quality: '60'
+      }
     })
   ])
 }
