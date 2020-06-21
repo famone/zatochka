@@ -1,4 +1,4 @@
-# zatochka
+# zatochka vus.js site project
 
 > A Vue.js project
 
