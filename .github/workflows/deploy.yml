@@ -1,0 +1,20 @@
+# This is a basic workflow to help you get started with Actions
+
+on: push
+name: Publish Website on Host
+jobs:
+  FTP-Deploy-Action:
+    name: FTP-Deploy-Action
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.1.0
+      with:
+        fetch-depth: 2
+    - name: FTP-Deploy-Action
+      uses: SamKirkland/FTP-Deploy-Action@3.1.1
+      with:
+        ftp-server: ftp://31.31.196.197
+        ftp-username: u0470484
+        ftp-password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: build
+        git-ftp-args: --remote-root "/zt.webnink.site/dist"
