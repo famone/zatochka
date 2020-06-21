@@ -1,5 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
+const TerserPlugin = require('terser-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   entry: './src/main.js',
@@ -53,7 +55,10 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    new VueLoaderPlugin()
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -65,12 +70,17 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
+    new TerserPlugin({
+        parallel: true,
+        cache: true,
+        extractComments: true,
+        terserOptions: {
+          ecma: 5,
+          ie8: false,
+          compress: true,
+          warnings: false,
+        },
+      }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })
