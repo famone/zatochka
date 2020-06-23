@@ -6,7 +6,7 @@
 					TOPZATOCHKA
 				</router-link>
 
-				<ul class="main-menu">
+				<ul class="main-menu hidden-xs hidden-sm">
 					<router-link tag="li" to="/" active-class="active-page" exact>
 			        	<a>Главная</a>
 			        </router-link>
@@ -16,18 +16,18 @@
           			<router-link tag="li"  to="/zatochka" active-class="active-page">
            				<a>Заточка инструмента</a>
           			</router-link>
-          			<router-link tag="li"  to="/contscts" active-class="active-page">
+          			<router-link tag="li"  to="/contacts" active-class="active-page">
            				<a>Контакты</a>
           			</router-link>	
 				</ul>
 
-				<div class="tel">
+				<div class="tel hidden-sm hidden-xs">
 					<a href="tel:+ 79999871006">+ 7 999 987 10 06</a>
 				</div>
 
 				<div class="cart-btn">
 					<div class="cart-indicator">
-						<span>1</span>
+						<span>0</span>
 					</div>
 					<img src="../assets/img/cartic.svg" alt="">
 				</div>
@@ -53,7 +53,7 @@ nav::before{
 	content: '';
 	position:absolute;
 	z-index: 18;
-	height: 350px;
+	height: 320px;
 	width: 100%;
 	background-color: red;
 	background: linear-gradient(180deg, #131313 0%, rgba(19, 19, 19, 0) 87.14%);

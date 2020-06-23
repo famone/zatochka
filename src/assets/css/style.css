@@ -35,7 +35,7 @@ nav:before{
 .price{
 	font-size: 25px;
 	color: #fff;
-	margin-bottom: 0;
+	margin-bottom: 0!important;
 	margin-top: 0;
 	min-height: inherit;
 }
@@ -60,7 +60,25 @@ nav:before{
 .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet{
 	background: #9d7044!important;
 }
-
+.white-txt{
+	font-size: 18px;
+	font-weight: 400;
+	color: #fff;
+	margin-bottom: 40px;
+}
+.small-btn{
+	font-size: 18px;
+	font-weight: 500;
+	color: #fff;
+	padding: 10px 30px;
+	background-color: #9D7044;
+	border-radius: 50px;
+	border: 2px #9D7044 solid;
+	transition: all .3s ease-in-out;
+}
+.small-btn:hover{
+	background-color: transparent;
+}
 
 
 
@@ -83,13 +101,20 @@ nav:before{
 	
 }
 @media (max-width: 512px) {
-
+	.zatoch .grey-txt{
+		color: #fff;
+	}
+	.slider2 h1{
+		font-size: 35px;
+	}
 }
 @media (max-width: 390px) {
 	
 }
 @media (max-width: 320px) {
-	
+	.slider2 h1{
+		font-size: 30px;
+	}
 }
 
 

@@ -2,13 +2,13 @@
 	<section id="goods">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-12 text-center">
+				<div class="col-lg-12 text-center wow fadeInUp">
 					<h2>Каталог товаров</h2>
 				</div>
 			</div>
 			<!-- карточки товаров -->
 			<div class="row">
-				<div class="col-lg-4 col-sm-6 good-box" v-for="good in goods">
+				<div class="col-lg-4 col-sm-6 good-box wow fadeIn" v-for="good in goods">
 					<router-link tag="a" :to="'/catalog/' + good.slug">
 						<div class="good-imgbox">
 							<div class="sale-bage" v-if="good.on_sale"><span>SALE</span></div>

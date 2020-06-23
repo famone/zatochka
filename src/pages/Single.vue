@@ -10,7 +10,7 @@
 						    </swiper-slide>
 							    <div class="swiper-pagination" slot="pagination"></div>
 	  					</swiper>
-						<div class="swiper-pagination" slot="pagination"></div>
+						
 	  					<div class="navigation">
 	  						<div class="swiper-button-prev" slot="button-prev"></div>
 							<div class="swiper-button-next" slot="button-next"></div>
@@ -83,12 +83,14 @@ import axios from 'axios'
 		},
 		created(){
 			this.itemSlug = this.$route.params.id
-			console.log(this.itemSlug)
 		}
 	}
 </script>
 
 <style scoped>
+/*nav:before {
+    display: none;
+}*/
 #singleprod{
 	padding: 190px 0;
 }
