@@ -4,6 +4,7 @@ import Single from './pages/Single.vue'
 import Zatochka from './pages/Zatochka.vue'
 import Catalog from './pages/Catalog.vue'
 import Contacts from './pages/Contacts.vue'
+import Cart from './pages/Cart.vue'
 
 export default new VueRouter({
 	routes: [
@@ -22,6 +23,10 @@ export default new VueRouter({
 		{
 			path: '/catalog',
 			component: Catalog
+		},
+		{
+			path: '/cart',
+			component: Cart
 		},
 		{
 			path: '/contacts',

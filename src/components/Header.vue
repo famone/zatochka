@@ -25,12 +25,12 @@
 					<a href="tel:+ 79999871006">+ 7 999 987 10 06</a>
 				</div>
 
-				<div class="cart-btn">
+				<router-link tag="div" to="/cart" class="cart-btn">
 					<div class="cart-indicator">
-						<span>0</span>
+						<span>{{cart.length}}</span>
 					</div>
 					<img src="../assets/img/cartic.svg" alt="">
-				</div>
+				</router-link tag="div" to="/cart">
 
 			</div>
 		</div>
@@ -38,7 +38,13 @@
 </template>
 
 <script>
-	
+import {mapState} from 'vuex'
+
+export default{
+	computed:{
+		...mapState('goods', ['cart'])
+	}
+}
 </script>
 
 <style scoped>
@@ -69,6 +75,7 @@ nav::before{
 	width: 37px;
 	position:relative;
 	z-index: 20;
+	cursor: pointer;
 }
 .cart-btn img{
 	width: 100%;
