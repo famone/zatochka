@@ -14,12 +14,15 @@ const settings = {
   version: '2.1'
 }
 
-Vue.use(YmapPlugin, settings)
+
 
 import 'swiper/css/swiper.css'
 
 Vue.use(VueRouter) 
 Vue.use(VueAwesomeSwiper)
+Vue.use(YmapPlugin, settings)
+Vue.use(require('vue-cookies'))
+
 
 new Vue({
   el: '#app',

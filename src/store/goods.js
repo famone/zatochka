@@ -23,38 +23,92 @@ const goods = {
 	  	},
 	  	addToCart({commit}, playload){
 
+	  		let cart_id = ''
 	  		let url = ''
 
-			if (getCookie('cart_id') !== null){
-				url = '/wp-json/cocart/v1/add-item/?cart_key=9e18904482b4faf8762361836a83b93d'
+			if ($cookies.get('woocommerce_cart_hash') !== null){
+
+				axios
+	  			.get('/wp-admin/admin-ajax.php',{
+	  				params: {
+      					action: 'get_cid'
+    				}
+	  			})
+	  			.then(response =>{
+	  				
+	  				url = '/wp-json/cocart/v1/add-item/?cart_key=' + response.data;
+	  				
+	  				axios
+					.post(url, playload)
+					.then((response) => {
+						console.log(response);
+					})
+					.catch(error => console.log(error))
+	  			})
+	  			.catch(error => console.log(error))
+
 			}else{
-				url = 'http://zt.webink.site/wp-json/cocart/v1/add-item'
+				axios
+					.post('/wp-json/cocart/v1/add-item', playload)
+					.then((response) => {
+						console.log(response);
+					})
+					.catch(error => console.log(error))
 			}
 
-			axios
-				.post(url, playload)
-				.then((response) => {
-				console.log(response);
-				})
-			.catch(error => console.log(error))
+			
 
 		},
 	  	loadCart({commit}){
-	  		axios
-	  			.get('https://zt.webink.site/wp-json/cocart/v1/get-cart')
-	  			.then(response =>{
-	  				// console.log(response)
+	  		if ($cookies.get('woocommerce_cart_hash') !== null){
+	  				
+
+	  			//получаем ид корзины
+	  			axios
+	  			.get('/wp-admin/admin-ajax.php',{
+	  				params: {
+      					action: 'get_cid'
+    				}
 	  			})
-	  			.catch(error => console.log(error))
+	  			.then(response =>{
+	  				
+	  				//получаем корзину
+		  			axios
+		  			.get('/wp-json/cocart/v1/get-cart/?cart_key=' + response.data)
+		  			.then(response =>{
+		  				console.log(response)
+		  			})
+		  			.catch(error => console.log(error))
+	  			})
+	  			.catch(error => console.log(error))			
+
+			}else{
+				return 'Корзина пуста'
+			}
+
+	  		
 
 	  	},
 	  	loadCartLength({commit}){
-	  		axios 
-	  			.get('https://zt.webink.site/wp-json/cocart/v1/count-items')
-	  			.then(response =>{
-	  				// console.log(response)
+	  		//получаем ид корзины
+	  			axios
+	  			.get('/wp-admin/admin-ajax.php',{
+	  				params: {
+      					action: 'get_cid'
+    				}
 	  			})
-	  			.catch(error => console.log(error))
+	  			.then(response =>{
+	  				
+	  				//получаем количество товаров в корзине
+		  			axios
+		  			.get('/wp-json/cocart/v1/count-items?cart_key=' + response.data)
+		  			.then(response =>{
+		  				console.log(response)
+		  			})
+		  			.catch(error => console.log(error))
+	  			})
+	  			.catch(error => console.log(error))		
+	  		
 	  	}
 	},
 	getters: {
