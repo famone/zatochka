@@ -4,17 +4,11 @@ import axios from 'axios'
 const goods = {
 	namespaced: true,
 	state: {
-		goods: [],
-		cart: [],
-		totalVal: 0
+		goods: []
   	},
   	mutations: {
   		SET_GOODS(state, playload){
   			state.goods = playload
-  		},
-  		SET_CART(state, playload){
-  			state.cart.push(playload)
-  			state.totalVal += parseInt(playload.product_id.price)
   		}
   	},
 	 actions: {
@@ -28,16 +22,26 @@ const goods = {
 	  			.catch(error => console.log(error))
 	  	},
 	  	addToCart({commit}, playload){
-	  		axios
-	  			.post('http://zt.webink.site/wp-json/cocart/v1/add-item', playload)
-	  			.then((response) => {
-    				// console.log(response);
-  				})
-  				.catch(error => console.log(error))
-	  	},
+
+	  		let url = ''
+
+			if (getCookie('cart_id') !== null){
+				url = '/wp-json/cocart/v1/add-item/?cart_key=9e18904482b4faf8762361836a83b93d'
+			}else{
+				url = 'http://zt.webink.site/wp-json/cocart/v1/add-item'
+			}
+
+			axios
+				.post(url, playload)
+				.then((response) => {
+				console.log(response);
+				})
+			.catch(error => console.log(error))
+
+		},
 	  	loadCart({commit}){
 	  		axios
-	  			.get('http://zt.webink.site/wp-json/cocart/v1/get-cart')
+	  			.get('https://zt.webink.site/wp-json/cocart/v1/get-cart')
 	  			.then(response =>{
 	  				// console.log(response)
 	  			})
@@ -46,16 +50,11 @@ const goods = {
 	  	},
 	  	loadCartLength({commit}){
 	  		axios 
-	  			.get('http://zt.webink.site/wp-json/cocart/v1/count-items')
+	  			.get('https://zt.webink.site/wp-json/cocart/v1/count-items')
 	  			.then(response =>{
 	  				// console.log(response)
 	  			})
 	  			.catch(error => console.log(error))
-	  	},
-	  	// custom
-	  	customCart({commit}, playload){
-	  		console.log(playload)
-	  		commit('SET_CART', playload)
 	  	}
 	},
 	getters: {

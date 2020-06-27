@@ -5,7 +5,7 @@
 				<h1>Корзина</h1>
 			</div>
 		</section>	
-		
+<!-- 		
 		<section id="cart">
 			<div class="container">
 				<table>
@@ -38,7 +38,7 @@
 					
 				</div>
 			</div>
-		</section>
+		</section> -->
 
 	</div>
 </template>
@@ -65,13 +65,6 @@ import {mapState} from 'vuex'
 				],
 				selectedDelivery: 0
 			}
-		},
-		computed: {
-			...mapState('goods', ['cart', 'totalVal'])
-		},
-		created(){
-			this.$store.dispatch('goods/loadCart')
-			// this.$store.dispatch('goods/loadCartLength')
 		}
 	}
 </script>

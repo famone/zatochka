@@ -56,13 +56,6 @@ export default{
 				quantity: 1
 			}
 			this.$store.dispatch('goods/addToCart', goodItem)
-
-			let customGoodItem = {
-				product_id: this.goods[index],
-				quantity: 1
-			}
-
-			this.$store.dispatch('goods/customCart', customGoodItem)
 		}
 	}
 }

@@ -27,7 +27,7 @@
 
 				<router-link tag="div" to="/cart" class="cart-btn">
 					<div class="cart-indicator">
-						<span>{{cart.length}}</span>
+						<span>1</span>
 					</div>
 					<img src="../assets/img/cartic.svg" alt="">
 				</router-link tag="div" to="/cart">
