@@ -5,6 +5,7 @@ import Zatochka from './pages/Zatochka.vue'
 import Catalog from './pages/Catalog.vue'
 import Contacts from './pages/Contacts.vue'
 import Cart from './pages/Cart.vue'
+import Zakaz from './pages/Zakaz.vue'
 
 export default new VueRouter({
 	routes: [
@@ -31,6 +32,10 @@ export default new VueRouter({
 		{
 			path: '/contacts',
 			component: Contacts
+		},
+		{
+			path: '/checkout',
+			component: Zakaz
 		}
 	],
 	mode: 'history',

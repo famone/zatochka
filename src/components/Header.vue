@@ -27,7 +27,7 @@
 
 				<router-link tag="div" to="/cart" class="cart-btn">
 					<div class="cart-indicator">
-						<span>1</span>
+						<span>{{localCart.length}}</span>
 					</div>
 					<img src="../assets/img/cartic.svg" alt="">
 				</router-link tag="div" to="/cart">
@@ -42,7 +42,7 @@ import {mapState} from 'vuex'
 
 export default{
 	computed:{
-		...mapState('goods', ['cart'])
+		...mapState('goods', ['localCart'])
 	}
 }
 </script>

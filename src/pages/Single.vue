@@ -28,7 +28,7 @@
 							<span class="sale-price" v-if="getGoods(itemSlug).on_sale">{{getGoods(itemSlug).regular_price}} ₽</span>
 						<h3 class="price">{{getGoods(itemSlug).price}} ₽</h3>
 						</div>
-						<button class="add-to-cart">+ Добавить в корзину</button>
+						<button class="add-to-cart" @click="addToCart()">+ Добавить в корзину</button>
 					</div>
 					<!-- ттх -->
 					<div class="tech">
@@ -53,6 +53,7 @@
 
 <script>
 import {mapGetters} from 'vuex'
+import {mapState} from 'vuex'
 import axios from 'axios' 
 
 	export default{
@@ -80,6 +81,20 @@ import axios from 'axios'
 	        	return this.$refs.mySwiper.$swiper
 	    	},
 			...mapGetters('goods', ['getGoods']),
+			...mapState('goods', ['goods']),
+		},
+		methods: {
+			addToCart(){
+				let newItem = this.goods.find(item => item.slug == this.$route.params.id)
+				let goodItem = {
+				product_id: newItem.id,
+				name: newItem.name ,
+				price: newItem.price,
+				quantity: 1
+				}
+				console.log(goodItem)
+				this.$store.dispatch('goods/addToCart', goodItem)
+			}
 		},
 		created(){
 			this.itemSlug = this.$route.params.id

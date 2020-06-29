@@ -5,66 +5,80 @@
 				<h1>Корзина</h1>
 			</div>
 		</section>	
-<!-- 		
+
+
+		
 		<section id="cart">
 			<div class="container">
+				<div v-if="localCart.length < 1">
+					<p class="white-txt"> Ваша корзина пуста</p>
+					<router-link tag="a" to="/catalog">
+						<button class="to-shop">В магазин</button>
+					</router-link>
+				</div>
+				
 				<table>
 					<tbody>
-						<tr v-for="cartItem in cart">
-							<td>{{cartItem.product_id.name}}</td>
-							<td>{{cartItem.product_id.name}}</td>
-							<td>{{cartItem.product_id.price}} ₽</td>
-							<td>✕</td>
+						<tr v-for="(cartItem, index) in localCart" :key="index">
+							<td>{{cartItem.name}}</td>
+							<td>{{cartItem.quantity}}</td>
+							<td>{{cartItem.price}} ₽</td>
+							<td><button class="remove-cart" @click="removeFromCart(index)">✕</button></td>
 						</tr>
 							</tbody>
 				</table>
 
-				<div class="row total">
-					<div class="col-lg-4">
-						<h3>Выберите тип доставки:</h3>
-						<div v-for="del in delivery">
-							<input type="radio" :value="del.price" v-model="selectedDelivery">
-							<label>{{del.name}}</label><br>
-						</div>
-					</div>
+
+
+				<div class="row total" v-if="localCart.length > 0">
 					<div class="col-lg-4">
 						<h3>Итого:</h3>
-						<h4 class="total-price">{{(totalVal + selectedDelivery).toLocaleString()}} ₽</h4>
-						<p class="grey-txt">Cтоимость заказа с учетом стоимости доставки</p>
+						<h4 class="total-price">{{(getTotal + parseInt(selected)).toLocaleString()}} ₽</h4>
+						<p class="grey-txt">C учетом стоимости доставки</p>
 					</div>
 					<div class="col-lg-4">
-						<button class="add-to-cart">Перейти к оформлению заказа</button>
+						<h3>Выберите тип удобной доставки:</h3>
+						<select name="" v-model="selected">
+							<option v-for="del in deliveryMethods" :value="del.settings.cost.value">{{del.title}}</option>
+						</select>
+
+					</div>
+					<div class="col-lg-4">
+						<router-link tag="a" to="/checkout">
+							<button class="add-to-cart">Перейти к оформлению заказа</button>
+						</router-link>
 					</div>
 					
 				</div>
 			</div>
-		</section> -->
+		</section>
+
 
 	</div>
 </template>
 
 <script>
 import {mapState} from 'vuex'
+import {mapGetters} from 'vuex'
 
 	export default{
+		computed: {
+			...mapState('goods', ['localCart', 'deliveryMethods']),
+			...mapGetters('goods', ['getTotal'])
+		},
+		methods: {
+			removeFromCart(index){
+				// alert(index)
+				this.$store.dispatch('goods/removeFromCart', index)
+			}
+		},
 		data(){
 			return{
-				delivery: [
-					{
-						name: 'Самовывоз',
-						price: 0
-					},
-					{
-						name: 'Сдэк',
-						price: 300
-					},
-					{
-						name: 'Почта России',
-						price: 180
-					},
-				],
-				selectedDelivery: 0
+				selected: '0'
 			}
+		},
+		created(){
+			this.$store.dispatch('goods/getDelivery')
 		}
 	}
 </script>
@@ -75,7 +89,7 @@ import {mapState} from 'vuex'
 	background-color: #252525;
 }
 #cart{
-	padding: 100px 0;
+	padding: 80px 0;
 }	
 table{
 	width: 100%;
@@ -88,6 +102,7 @@ tr{
 }
 td{
 	padding: 15px 5px;
+	width: 33%;
 }
 .total{
 	padding: 40px 30px;
@@ -129,5 +144,40 @@ h3{
 }
 .add-to-cart:hover{
 	background-color: transparent;
+}
+.to-shop{
+	padding: 15px 50px;
+	border-radius: 50px;
+	color: #fff;
+	font-size: 18px;
+	background-color: #9D7044;
+	border: 2px #9D7044 solid;
+	transition: all .3s ease-in-out;
+}
+.to-shop:hover{
+	background-color: transparent;
+}
+.remove-cart{
+	border:none;
+	background-color: transparent;
+	color: #9D7044;
+	cursor: pointer;
+}
+select{
+	-webkit-appearance: none;
+    -moz-appearance: none;
+	background-color: #252525;
+	color: #fff;
+	padding:23px 15px;
+	font-size: 12px;
+	border-radius: 50px;
+	border:none;
+	margin-bottom: 30px;
+	width: 100%;
+	background-image: url(../assets/img/arr.svg);
+    background-repeat: no-repeat;
+    -webkit-background-size: 20px;
+    background-size: 20px;
+    background-position: right 10px center;
 }
 </style>

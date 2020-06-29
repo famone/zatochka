@@ -53,6 +53,8 @@ export default{
 		addToCart(index){
 			let goodItem = {
 				product_id: this.goods[index].id,
+				name: this.goods[index].name ,
+				price: this.goods[index].price,
 				quantity: 1
 			}
 			this.$store.dispatch('goods/addToCart', goodItem)
