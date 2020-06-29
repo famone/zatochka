@@ -24,7 +24,7 @@
 						<label for="">Телефон <span>*</span></label>
 						<input type="text" v-mask="'+7 (###) ###-##-##'" v-model="emailBody.phone">
 						<label for="">Адрес вызова курьера <span>*</span></label>
-						<input type="text" v-model="emailBody.padress">
+						<input type="text" v-model="emailBody.padress" id="suggest">
 						<button type="submit" @click.prevent="submitForm()">Заказать курьера</button>
 					</form>
 					<div class="text-center" v-if="errors.message !== '' " :class="{green : errors.status === 'mail_sent'}">
@@ -77,26 +77,27 @@ export default{
                     this.errors = error.response.data
                 });
         	},
-		// yaMapInit() { 
-		// 	this.SuggestView = new ymaps.SuggestView(this.geoInput, {results: 1, offset: [20, 30]});
-		// }
+		yaMapInit() { 
+			console.log('123 YAINIT');
+			this.SuggestView = new ymaps.SuggestView('suggest');
+		}
 	},
-	// created() { 
-	// 	const script = document.createElement('script')
+	created() { 
+		const script = document.createElement('script')
 
-	// 	script.onload = () => {
-	// 	ymaps.ready(() => this.yaMapInit());
+		script.onload = () => {
+		ymaps.ready(() => this.yaMapInit());
 
-	// 	};
+		};
 
-	// 	script.id = 'ymaps'
-	// 	script.src = "https://api-maps.yandex.ru/2.1/?apikey=8c4059db-3b8d-4535-a15e-569ee80fc827&lang=ru_RU"
-	// 	document.head.append(script);
-	// },
-	// destroyed() {
-	// 	document.head.querySelector('script#ymaps').remove()
-	// 	// ymaps = null
-	// }
+		script.id = 'ymaps'
+		script.src = "https://api-maps.yandex.ru/2.1/?apikey=8c4059db-3b8d-4535-a15e-569ee80fc827&lang=ru_RU&load=SuggestView"
+		document.head.append(script);
+	},
+	destroyed() {
+		document.head.querySelector('script#ymaps').remove()
+		// ymaps = null
+	}
 }
 
 	
