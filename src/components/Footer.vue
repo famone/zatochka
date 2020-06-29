@@ -19,7 +19,7 @@
 						<router-link tag="li" to="/catalog">Каталог</router-link>
 						<router-link tag="li" to="/zatochka">Заточка инструмента</router-link>
 						<router-link tag="li" to="/contacts">Контакты</router-link>
-						<router-link tag="li" to="/catalog">Корзина</router-link>
+						<router-link tag="li" to="/cart">Корзина</router-link>
 					</ul>
 				</div>
 				<div class="col-lg-3">
@@ -34,11 +34,14 @@
 				<div class="col-lg-3">
 					<h5>ОСТАВЬТЕ ЗАЯВКУ</h5>
 					<form action="">
-						<input type="text" placeholder="+7 (___) ___-__-__">
-						<button type="submit" class="sbmt-btn">Отправить</button>
+						<input type="text" v-model="emailBody.phone" placeholder="+7 (___) ___-__-__" v-mask="'+7 (###) ###-##-##'">
+						<button type="submit" class="sbmt-btn" @click.prevent="submitForm()">Отправить</button>
 					</form>
+					<div v-if="errors.message !== '' " :class="{green : errors.status === 'mail_sent'}">
+						<p class="resp-message">{{errors.message}}</p>
+					</div>
 					<div class="webink">
-						<a href="">coding masters - webink.site</a>
+						<a href="https://webink.site/">coding masters - webink.site</a>
 					</div>
 				</div>
 			</div>
@@ -47,10 +50,53 @@
 </template>
 
 <script>
-	
+import axios from 'axios'
+
+export default{
+	data(){
+		return{
+			emailBody: {	
+				phone: ''
+			},
+			errors: '',
+			url: 'http://zt.webink.site/wp-json/contact-form-7/v1/contact-forms/25/feedback'
+		}
+	},
+	methods: {
+		submitForm() {
+        	var form1 = new FormData();
+        	
+       		for (var field in this.emailBody){
+				form1.append(field, this.emailBody[field]);
+			};
+
+            axios
+            	.post(this.url, form1)
+                .then((response) => {
+                    console.log(response);
+                    this.errors = response.data;
+                    if(response.data.status === 'mail_sent'){
+                    	this.emailBody = {
+							phone: ''
+						}
+                    }
+                })
+                .catch((error) => {
+                    this.errors = error.response.data
+                });
+        	}
+	}
+}
 </script>
 
 <style scoped>
+.resp-message {
+	margin-top:15px;
+	color: red;
+}
+.green p{
+	color: #47f700;
+}
 footer{
 	padding: 40px 0;
 	background-color: #252525;

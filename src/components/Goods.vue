@@ -13,6 +13,11 @@
 				</div>
 			</div>
 			<!-- карточки товаров -->
+
+<div v-if="!loading" class="text-center">
+	<img src="../assets/img/preloader.svg" class="small-preloader">
+</div>
+
 			<div class="row">
 				<div class="col-lg-4 col-sm-6 good-box wow fadeIn" v-for="(good, index) in goods" :key="index" v-if="good.categories[0].name === categoryFilter || categoryFilter === 'Все'">
 					<router-link tag="a" :to="'/catalog/' + good.slug">
@@ -25,8 +30,8 @@
 					<p class="grey-txt" v-html="good.description"></p>
 					<div class="good-small-row">
 						<div>
-							<span class="sale-price" v-if="good.on_sale">{{good.regular_price}} ₽</span>
-							<h3 class="price">{{good.price}} ₽</h3>
+							<span class="sale-price" v-if="good.on_sale">{{good.regular_price}} руб.</span>
+							<h3 class="price">{{good.price}} руб.</h3>
 						</div>
 						<button class="add-to-cart" @click="addToCart(index)">+ Добавить в корзину</button>
 					</div>
@@ -47,10 +52,11 @@ export default{
 		}
 	},
 	computed: {
-		...mapState('goods', ['goods']),
+		...mapState('goods', ['goods', 'loading']),
 	},
 	methods:{
 		addToCart(index){
+			alert('Товар успешно добавлен в корзину!')
 			let goodItem = {
 				product_id: this.goods[index].id,
 				name: this.goods[index].name ,
@@ -125,5 +131,25 @@ select{
     -webkit-background-size: 20px;
     background-size: 20px;
     background-position: right 10px center;
+}
+.small-preloader{
+	height: 80px;
+	margin: 25px 0;
+	transform: scale(1);
+	animation: pulse 1s infinite;
+	transition:all .2s ease-in-out;
+}
+@keyframes pulse {
+	0% {
+		transform: scale(0.95);
+	}
+
+	70% {
+		transform: scale(1.4);
+	}
+
+	100% {
+		transform: scale(0.95);
+	}
 }
 </style>

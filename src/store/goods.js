@@ -6,10 +6,12 @@ const goods = {
 	state: {
 		goods: [],
 		localCart: [],
-		deliveryMethods: []
+		deliveryMethods: [],
+		loading: false
   	},
   	mutations: {
   		SET_GOODS(state, playload){
+  			state.loading = true
   			state.goods = playload
   		},
   		SET_LOCALCART(state, playload){

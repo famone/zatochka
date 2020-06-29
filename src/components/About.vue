@@ -11,7 +11,9 @@
 					<br><br>
 					Также мы предлагаем профессиональные инструменты с ручной заточкой по доступным ценам!
 				</p>
-				<button class="small-btn wow fadeInUp" data-wow-delay=".4s">Больше интересного в нашем Instagram</button>
+				<a href="https://www.instagram.com/topzatochka_spb/">
+					<button class="small-btn wow fadeInUp" data-wow-delay=".4s">Больше интересного в нашем Instagram</button>
+				</a>
 			</div>
 			<div class="col-lg-6 scissors">
 				

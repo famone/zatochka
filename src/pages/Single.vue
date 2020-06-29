@@ -26,7 +26,7 @@
 					<div class="good-small-row">
 						<div>
 							<span class="sale-price" v-if="getGoods(itemSlug).on_sale">{{getGoods(itemSlug).regular_price}} ₽</span>
-						<h3 class="price">{{getGoods(itemSlug).price}} ₽</h3>
+						<h3 class="price">{{getGoods(itemSlug).price}} руб.</h3>
 						</div>
 						<button class="add-to-cart" @click="addToCart()">+ Добавить в корзину</button>
 					</div>
@@ -85,6 +85,7 @@ import axios from 'axios'
 		},
 		methods: {
 			addToCart(){
+				alert('Товар успешно добавлен в корзину!')
 				let newItem = this.goods.find(item => item.slug == this.$route.params.id)
 				let goodItem = {
 				product_id: newItem.id,

@@ -5,6 +5,8 @@ import router from './routes'
 import store from './store'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import YmapPlugin from 'vue-yandex-maps'
+import VueTheMask from 'vue-the-mask'
+
 
 
 const settings = {
@@ -18,10 +20,13 @@ const settings = {
 
 import 'swiper/css/swiper.css'
 
+Vue.use(VueTheMask)
 Vue.use(VueRouter) 
 Vue.use(VueAwesomeSwiper)
 Vue.use(YmapPlugin, settings)
 Vue.use(require('vue-cookies'))
+
+
 
 
 new Vue({

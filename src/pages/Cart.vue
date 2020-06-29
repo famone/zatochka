@@ -22,7 +22,7 @@
 						<tr v-for="(cartItem, index) in localCart" :key="index">
 							<td>{{cartItem.name}}</td>
 							<td>{{cartItem.quantity}}</td>
-							<td>{{cartItem.price}} ₽</td>
+							<td>{{cartItem.price}} руб.</td>
 							<td><button class="remove-cart" @click="removeFromCart(index)">✕</button></td>
 						</tr>
 							</tbody>
@@ -33,7 +33,7 @@
 				<div class="row total" v-if="localCart.length > 0">
 					<div class="col-lg-4">
 						<h3>Итого:</h3>
-						<h4 class="total-price">{{(getTotal + parseInt(selected)).toLocaleString()}} ₽</h4>
+						<h4 class="total-price">{{(getTotal + parseInt(selected)).toLocaleString()}} руб.</h4>
 						<p class="grey-txt">C учетом стоимости доставки</p>
 					</div>
 					<div class="col-lg-4">
