@@ -23,6 +23,7 @@ export default {
   },
   created(){
   	this.$store.dispatch('goods/loadGoods')
+    this.$store.dispatch('goods/loadPayment');
   }
 }
 </script>

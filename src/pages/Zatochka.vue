@@ -8,13 +8,14 @@
 		<section id="ztchka">
 			<div class="container">
 				<div class="col-lg-6">
-					<h2>Курьер приедет в удобное время и заберет заказ.</h2>
-					<p class="white-txt">Заточенные инструменты вы получите обратно в этот же день.
+					<div class="box">
+						<h2>Курьер приедет в удобное время и заберет заказ.</h2>
+					<p class="grey-txt">Заточенные инструменты вы получите обратно в этот же день.
 						<br><br>
-					Заточка одного инструмента - <strong>300 р.</strong> <br><br>
-Если вы хотите заточить более 6 инструментов - курьер за наш счёт (при удаленных адресах возможна доплата)! <br>
-Оплата - при получении. <br>Гарантия качества
-						</p>
+					Стоимость заточки одного инструмента - <strong>300 р.</strong> <br><br>
+					Если вы хотите заточить более 6 инструментов - курьер за наш счёт (при удаленных адресах возможна доплата)! <br>
+					Оплата - при получении. <br>Гарантия качества</p>
+					</div>
 
 				</div>
 				<div class="col-lg-6">
@@ -24,7 +25,7 @@
 						<label for="">Телефон <span>*</span></label>
 						<input type="text" v-mask="'+7 (###) ###-##-##'" v-model="emailBody.phone">
 						<label for="">Адрес вызова курьера <span>*</span></label>
-						<input type="text" v-model="emailBody.padress" id="suggest">
+						<input type="text" @change="changeAddr()" id="suggest">
 						<button type="submit" @click.prevent="submitForm()">Заказать курьера</button>
 					</form>
 					<div class="text-center" v-if="errors.message !== '' " :class="{green : errors.status === 'mail_sent'}">
@@ -53,6 +54,9 @@ export default{
 	},
 
 	methods: {
+		changeAddr(){
+			this.emailBody.padress = suggest.value
+		},
 		submitForm() {
         	var form2 = new FormData();
         	
@@ -80,6 +84,7 @@ export default{
 		yaMapInit() { 
 			console.log('123 YAINIT');
 			this.SuggestView = new ymaps.SuggestView('suggest');
+			this.SuggestView.value = this.emailBody.padress
 		}
 	},
 	created() { 
@@ -114,6 +119,11 @@ export default{
 #inner{
 	padding: 150px 0;
 	background-color: #252525;
+	background-image: url(../assets/img/zat.png);
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-position: right center;
+	background-repeat: no-repeat;
 }
 #ztchka{
 	padding: 80px 0;
@@ -150,5 +160,11 @@ button{
 }
 button:hover{
 	background-color: #7b5835;
+}
+.box{
+	padding:40px 22px;
+	background-color: #252525;
+	border-radius: 10px;
+	margin-bottom: 25px;
 }
 </style>

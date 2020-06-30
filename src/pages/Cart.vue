@@ -17,13 +17,21 @@
 					</router-link>
 				</div>
 				
-				<table>
+				<table v-if="localCart.length > 0">
+					<thead>
+						<tr>
+							<td>Товар:</td>
+							<td class="text-center">Колличество:</td>
+							<td>Цена:</td>
+							<td></td>
+						</tr>
+					</thead>
 					<tbody>
 						<tr v-for="(cartItem, index) in localCart" :key="index">
 							<td>{{cartItem.name}}</td>
-							<td>{{cartItem.quantity}}</td>
+							<td class="text-center"><button class="plusik" @click="removeQuant(index);deliteQuant(index)">-</button> {{cartItem.quantity}} <button class="plusik" @click="addQuant(index)">+</button></td>
 							<td>{{cartItem.price}} руб.</td>
-							<td><button class="remove-cart" @click="removeFromCart(index)">✕</button></td>
+							<td class="text-center"><button class="remove-cart" @click="removeFromCart(index)">✕</button></td>
 						</tr>
 							</tbody>
 				</table>
@@ -33,27 +41,24 @@
 				<div class="row total" v-if="localCart.length > 0">
 					<div class="col-lg-4">
 						<h3>Итого:</h3>
-						<h4 class="total-price">{{(getTotal + parseInt(selected)).toLocaleString()}} руб.</h4>
+						<h4 class="total-price">{{(selectedDel + getTotal).toLocaleString()}} руб.</h4>
 						<p class="grey-txt">C учетом стоимости доставки</p>
 					</div>
 					<div class="col-lg-4">
 						<h3>Выберите тип удобной доставки:</h3>
-						<select name="" v-model="selected">
-							<option v-for="del in deliveryMethods" :value="del.settings.cost.value">{{del.title}}</option>
+						<select name="" @change="onChangeShip()"  v-model="selected">
+							<option v-for="del in deliveryMethods" :value="del">{{del.title}}</option>
 						</select>
-
 					</div>
 					<div class="col-lg-4">
 						<router-link tag="a" to="/checkout">
-							<button class="add-to-cart">Перейти к оформлению заказа</button>
+							<button class="add-to-cart" :disabled="selected === '0' ">Перейти к оформлению заказа</button>
 						</router-link>
 					</div>
 					
 				</div>
 			</div>
 		</section>
-
-
 	</div>
 </template>
 
@@ -62,19 +67,33 @@ import {mapState} from 'vuex'
 import {mapGetters} from 'vuex'
 
 	export default{
+		data(){
+			return{
+				selected: "0",
+				selectedDel: 0
+			}
+		},
 		computed: {
-			...mapState('goods', ['localCart', 'deliveryMethods']),
+			...mapState('goods', ['localCart', 'deliveryMethods', 'cart']),
 			...mapGetters('goods', ['getTotal'])
 		},
 		methods: {
 			removeFromCart(index){
 				// alert(index)
 				this.$store.dispatch('goods/removeFromCart', index)
-			}
-		},
-		data(){
-			return{
-				selected: '0'
+			},
+			addQuant(index){
+				this.$store.dispatch('goods/addQuant', this.localCart[index])
+			},
+			removeQuant(index){
+				this.$store.dispatch('goods/removeQuant', this.localCart[index])
+			},
+			deliteQuant(index){
+				this.$store.dispatch('goods/deliteQuant', index)
+			},
+			onChangeShip(){
+				this.selectedDel = parseInt(this.selected.settings.cost.value)
+				this.$store.dispatch('goods/setShipping', this.selected)
 			}
 		},
 		created(){
@@ -94,6 +113,9 @@ import {mapGetters} from 'vuex'
 table{
 	width: 100%;
 	margin-bottom: 50px;
+}
+thead tr{
+	color: #fff;
 }
 tr{
 	border-bottom: 1px #2b2b2b solid;
@@ -145,6 +167,11 @@ h3{
 .add-to-cart:hover{
 	background-color: transparent;
 }
+.add-to-cart:disabled {
+	opacity: .4;
+  	cursor: not-allowed;
+  	pointer-events: all !important;
+}
 .to-shop{
 	padding: 15px 50px;
 	border-radius: 50px;
@@ -179,5 +206,13 @@ select{
     -webkit-background-size: 20px;
     background-size: 20px;
     background-position: right 10px center;
+}
+.plusik{
+	background-color: #9D7044;
+	border: none;
+	border-radius: 5px;
+	color: #fff;
+	width: 25px;
+	margin:0 4px;
 }
 </style>

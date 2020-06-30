@@ -2,7 +2,7 @@
 	<section id="goods">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-12 text-center wow fadeInUp">
+				<div class="col-lg-12 text-center">
 					<h2>Каталог товаров</h2>
 					<select v-model="categoryFilter">
 						<option value="Все">Все</option>
@@ -33,7 +33,7 @@
 							<span class="sale-price" v-if="good.on_sale">{{good.regular_price}} руб.</span>
 							<h3 class="price">{{good.price}} руб.</h3>
 						</div>
-						<button class="add-to-cart" @click="addToCart(index)">+ Добавить в корзину</button>
+						<button class="add-to-cart" @click="addToCart(index);addCart(index)">+ Добавить в корзину</button>
 					</div>
 				</div>
 			</div>
@@ -56,7 +56,7 @@ export default{
 	},
 	methods:{
 		addToCart(index){
-			alert('Товар успешно добавлен в корзину!')
+			// alert('Товар успешно добавлен в корзину!')
 			let goodItem = {
 				product_id: this.goods[index].id,
 				name: this.goods[index].name ,
@@ -64,6 +64,13 @@ export default{
 				quantity: 1
 			}
 			this.$store.dispatch('goods/addToCart', goodItem)
+		},
+		addCart(index){
+			let goodItemMain = {
+				product_id: this.goods[index].id,
+				quantity: 1
+			}
+			this.$store.dispatch('goods/addCart', goodItemMain)
 		}
 	}
 }

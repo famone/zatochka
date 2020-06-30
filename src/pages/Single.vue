@@ -28,7 +28,7 @@
 							<span class="sale-price" v-if="getGoods(itemSlug).on_sale">{{getGoods(itemSlug).regular_price}} ₽</span>
 						<h3 class="price">{{getGoods(itemSlug).price}} руб.</h3>
 						</div>
-						<button class="add-to-cart" @click="addToCart()">+ Добавить в корзину</button>
+						<button class="add-to-cart" @click="addToCart();addCart()">+ Добавить в корзину</button>
 					</div>
 					<!-- ттх -->
 					<div class="tech">
@@ -95,6 +95,14 @@ import axios from 'axios'
 				}
 				console.log(goodItem)
 				this.$store.dispatch('goods/addToCart', goodItem)
+			},
+			addCart(){
+				let newItem = this.goods.find(item => item.slug == this.$route.params.id)
+				let goodItemMain = {
+					product_id: newItem.id,
+					quantity: 1
+				}
+				this.$store.dispatch('goods/addCart', goodItemMain)
 			}
 		},
 		created(){

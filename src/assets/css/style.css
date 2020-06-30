@@ -79,7 +79,19 @@ nav:before{
 .small-btn:hover{
 	background-color: transparent;
 }
-
+.confirm{
+	font-size: 20px;
+	font-weight: 400;
+	border-radius: 5px;
+	background-color: #ffdd2d;
+	color: #131313;
+	padding:15px 25px;
+	border: 2px #ffdd2d solid;
+	transition: all .3s ease-in-out;
+}
+.confirm:hover{
+	background-color: transparent;
+}
 
 
 /*ADAPTIIIIIIIIIV*/
@@ -106,6 +118,9 @@ nav:before{
 	}
 	.slider2 h1{
 		font-size: 35px;
+	}
+	.box h2{
+		font-size: 30px;
 	}
 }
 @media (max-width: 390px) {

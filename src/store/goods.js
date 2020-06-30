@@ -6,8 +6,11 @@ const goods = {
 	state: {
 		goods: [],
 		localCart: [],
+    cart:[],
 		deliveryMethods: [],
-		loading: false
+		loading: false,
+    payment: [],
+    shipping: {}
   	},
   	mutations: {
   		SET_GOODS(state, playload){
@@ -34,23 +37,85 @@ const goods = {
   		},
   		REMOVE_FROM_CART(state, playload){
   			state.localCart.splice(playload, 1);
+        state.cart.splice(playload, 1)
   		},
   		SET_DEL(state, playload){
   			state.deliveryMethods = playload
-  		}
+  		},
+  		ADD_QUANT(state, playload){
+  			let productInGoods = state.goods.find(item =>{
+  				return item.id === playload.product_id
+  			})
+
+  			let productInCart = state.localCart.find(item =>{
+  				return item.product_id === playload.product_id
+  			})
+
+          let productInMain = state.cart.find(item =>{
+            return item.product_id === playload.product_id
+          })
+  			productInCart.quantity += 1;
+  			productInCart.price = productInGoods.price * (productInCart.quantity)
+        productInMain.quantity += 1;
+  		},
+  		REMOVE_QUANT(state, playload){
+  			let productInGoods = state.goods.find(item =>{
+  				return item.id === playload.product_id
+  			})
+
+  			let productInCart = state.localCart.find(item =>{
+  				return item.product_id === playload.product_id
+  			})
+
+        let productInMain = state.cart.find(item =>{
+            return item.product_id === playload.product_id
+          })
+
+  			productInCart.quantity -= 1;
+  			productInCart.price = productInGoods.price * (productInCart.quantity);
+        productInMain.quantity -= 1;
+  		},
+  		DELITE_QUANT(state, playload){
+  			if(state.localCart[playload].quantity == 0){
+  				state.localCart.splice(playload, 1)
+  			}
+
+        if(state.cart[playload].quantity == 0){
+          state.cart.splice(playload, 1)
+        }
+  		},
+      ADD_MAIN(state, playload){
+        
+        let productInCart = state.cart.find(item =>{
+          return item.product_id === playload.product_id
+        })
+
+        if(productInCart){
+          productInCart.quantity += playload.quantity;
+          return
+        }
+        
+        state.cart.push(playload)
+
+      },
+      SET_PAYMENT(state, playload){
+        state.payment.push(playload)
+      },
+      SET_SHIPPING(state, playload){
+        state.shipping = playload
+      }
   	},
 	 actions: {
 	  	loadGoods({commit}){
 	  		axios
 	  			.get('https://zt.webink.site/wp-json/wc/v2/products/?consumer_key=ck_1b3bd4c37269692bd10e544448eca18fee4765f2&consumer_secret=cs_292587791608de25be0fc86e4fc35f0d4dbaf0fb')
 	  			.then(response =>{
-	  				// console.log(response.data)
+	  				console.log(response.data)
 	  				commit('SET_GOODS', response.data)
 	  			})
 	  			.catch(error => console.log(error))
 	  	},
 	  	addToCart({commit}, playload){
-	  		console.log(playload)
 	  		commit('SET_LOCALCART', playload)
 	  	},
 	  	removeFromCart({commit}, playload){
@@ -60,100 +125,36 @@ const goods = {
 	  		axios
 	  			.get('https://zt.webink.site/wp-json/wc/v3/shipping/zones/1/methods?consumer_key=ck_1b3bd4c37269692bd10e544448eca18fee4765f2&consumer_secret=cs_292587791608de25be0fc86e4fc35f0d4dbaf0fb')
 	  			.then(response =>{
-	  				console.log(response.data)
+            console.log(response.data)
 	  				commit('SET_DEL', response.data)
 	  			})
 	  			.catch(error => console.log(error))
-	  	}
-	 //  	addToCart({commit}, playload){
-
-	 //  		let cart_id = ''
-	 //  		let url = ''
-
-		// 	if ($cookies.get('woocommerce_cart_hash') !== null){
-
-		// 		axios
-	 //  			.get('https://zt.webink.site/wp-admin/admin-ajax.php',{
-	 //  				params: {
-  //     					action: 'get_cid'
-  //   				}
-	 //  			})
-	 //  			.then(response =>{
-	  				
-	 //  				url = 'https://zt.webink.site/wp-json/cocart/v1/add-item/?cart_key=' + response.data;
-	  				
-	 //  				axios
-		// 			.post(url, playload)
-		// 			.then((response) => {
-		// 				console.log(response);
-		// 			})
-		// 			.catch(error => console.log(error))
-	 //  			})
-	 //  			.catch(error => console.log(error))
-
-		// 	}else{
-		// 		axios
-		// 			.post('https://zt.webink.site/wp-json/cocart/v1/add-item', playload)
-		// 			.then((response) => {
-		// 				console.log(response);
-		// 			})
-		// 			.catch(error => console.log(error))
-		// 	}
-
-			
-
-		// },
-	 //  	loadCart({commit}){
-	 //  		if ($cookies.get('woocommerce_cart_hash') !== null){
-	  				
-
-	 //  			//получаем ид корзины
-	 //  			axios
-	 //  			.get('https://zt.webink.site/wp-admin/admin-ajax.php',{
-	 //  				params: {
-  //     					action: 'get_cid'
-  //   				}
-	 //  			})
-	 //  			.then(response =>{
-	  				
-	 //  				//получаем корзину
-		//   			axios
-		//   			.get('https://zt.webink.site/wp-json/cocart/v1/get-cart/?cart_key=' + response.data)
-		//   			.then(response =>{
-		//   				console.log(response)
-		//   			})
-		//   			.catch(error => console.log(error))
-	 //  			})
-	 //  			.catch(error => console.log(error))			
-
-		// 	}else{
-		// 		return 'Корзина пуста'
-		// 	}
-
-	  		
-
-	 //  	},
-	 //  	loadCartLength({commit}){
-	 //  		//получаем ид корзины
-	 //  			axios
-	 //  			.get('https://zt.webink.site/wp-admin/admin-ajax.php',{
-	 //  				params: {
-  //     					action: 'get_cid'
-  //   				}
-	 //  			})
-	 //  			.then(response =>{
-	  				
-	 //  				//получаем количество товаров в корзине
-		//   			axios
-		//   			.get('https://zt.webink.site/wp-json/cocart/v1/count-items?cart_key=' + response.data)
-		//   			.then(response =>{
-		//   				console.log(response)
-		//   			})
-		//   			.catch(error => console.log(error))
-	 //  			})
-	 //  			.catch(error => console.log(error))		
-	  		
-	 //  	}
+	  	},
+	  	addQuant({commit}, playload){
+	  		commit('ADD_QUANT', playload)
+	  	},
+	  	removeQuant({commit}, playload){
+	  		commit('REMOVE_QUANT', playload)
+	  	},
+	  	deliteQuant({commit}, playload){
+	  		commit('DELITE_QUANT', playload)
+	  	},
+      addCart({commit}, playload){
+        commit('ADD_MAIN', playload)
+      },
+      loadPayment({commit}){
+        axios
+          .get('https://zt.webink.site/wp-json/wc/v3/payment_gateways?consumer_key=ck_1b3bd4c37269692bd10e544448eca18fee4765f2&consumer_secret=cs_292587791608de25be0fc86e4fc35f0d4dbaf0fb')
+          .then(response =>{
+            console.log(response.data.find(item => item.enabled === true))
+            commit('SET_PAYMENT', response.data.find(item => item.enabled === true))
+          })
+          .catch(error => console.log(error))
+      },
+      setShipping({commit}, playload){
+        
+        commit('SET_SHIPPING', playload)
+      }
 	},
 	getters: {
 		getGoods: (state) => (slug) => {
