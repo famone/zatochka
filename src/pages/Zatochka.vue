@@ -49,7 +49,7 @@ export default{
 				padress: ''
 			},
 			errors: '',
-			url: 'http://zt.webink.site/wp-json/contact-form-7/v1/contact-forms/33/feedback'
+			url: 'https://zt.webink.site/wp-json/contact-form-7/v1/contact-forms/33/feedback'
 		}
 	},
 

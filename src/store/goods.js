@@ -9,7 +9,7 @@ const goods = {
     cart:[],
 		deliveryMethods: [],
 		loading: false,
-    payment: [],
+    payment: {},
     shipping: {}
   	},
   	mutations: {
@@ -99,7 +99,7 @@ const goods = {
 
       },
       SET_PAYMENT(state, playload){
-        state.payment.push(playload)
+        state.payment = playload
       },
       SET_SHIPPING(state, playload){
         state.shipping = playload

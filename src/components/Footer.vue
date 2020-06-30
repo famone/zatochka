@@ -59,7 +59,7 @@ export default{
 				phone: ''
 			},
 			errors: '',
-			url: 'http://zt.webink.site/wp-json/contact-form-7/v1/contact-forms/25/feedback'
+			url: 'https://zt.webink.site/wp-json/contact-form-7/v1/contact-forms/25/feedback'
 		}
 	},
 	methods: {

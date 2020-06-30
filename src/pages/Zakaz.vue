@@ -57,11 +57,11 @@
 		<section id="payment">
 			<div class="container">
 				<div class="col-lg-12">
-					<div class="pay-method" v-for="pay in payment">
-						<img v-if="pay.id === 'tinkoff'"
+					<div class="pay-method">
+						<img v-if="payment.id === 'tinkoff'"
 						 src="https://zt.webink.site/wp-content/plugins/tinkoff-woocommerce/tinkoff/tinkoff.png">
-						<h3 >{{pay.title}}</h3>
-						<p class="pay-box">{{pay.description}}</p>
+						<h3 >{{payment.title}}</h3>
+						<p class="pay-box">{{payment.description}}</p>
 						<p>Ваши личные данные будут использоваться для обработки ваших заказов, упрощения вашей работы с сайтом и для других целей, описанных в нашей политика конфиденциальности.</p>
 						<button class="confirm" @click.prevent="getOrder()">Подтвердить заказ</button>
 					</div>
@@ -130,6 +130,7 @@ import axios from 'axios'
 			}
 		},
 		created(){
+			// console.log(this.payment.find(item => item.enabled === true))
 			console.log(this.payment)
 		},
 		methods: {
@@ -142,6 +143,8 @@ import axios from 'axios'
 				alert('OK');
 
 				let postArr = {
+					payment_method: this.payment.id,
+					payment_method_title: this.payment.description,
 					billing: {
 						first_name: this.name,
 						last_name: this.surname,
