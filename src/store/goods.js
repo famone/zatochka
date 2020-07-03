@@ -10,7 +10,8 @@ const goods = {
 		deliveryMethods: [],
 		loading: false,
     payment: {},
-    shipping: {}
+    shipping: {},
+    cartAlert: false
   	},
   	mutations: {
   		SET_GOODS(state, playload){
@@ -19,6 +20,11 @@ const goods = {
   		},
   		SET_LOCALCART(state, playload){
 
+        state.cartAlert = true;
+
+        setTimeout(()=>{
+           state.cartAlert = false
+      }, 1300)
 
   			let productInCart = state.localCart.find(item =>{
   				return item.product_id === playload.product_id
@@ -33,7 +39,6 @@ const goods = {
 
   			state.localCart.push(playload)
 
-
   		},
   		REMOVE_FROM_CART(state, playload){
   			state.localCart.splice(playload, 1);
@@ -41,6 +46,7 @@ const goods = {
   		},
   		SET_DEL(state, playload){
   			state.deliveryMethods = playload
+        state.shipping = state.deliveryMethods[0]
   		},
   		ADD_QUANT(state, playload){
   			let productInGoods = state.goods.find(item =>{

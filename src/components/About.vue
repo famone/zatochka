@@ -15,7 +15,7 @@
 					<button class="small-btn wow fadeInUp" data-wow-delay=".4s">Больше интересного в нашем Instagram</button>
 				</a>
 			</div>
-			<div class="col-lg-6 scissors">
+			<div class="col-lg-6 scissors hidden-xs hidden-sm">
 				
 			</div>
 			</div>

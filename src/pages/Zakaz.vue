@@ -1,13 +1,36 @@
 <template>
 	<div>
+
+<div class="spasibo-pop" v-if="showSpasibo" @click="showSpasibo = false">
+	<div class="spasibo text-center">
+		<img src="../assets/img/checkmark.svg" alt=""><br><br>
+		<p class="white-txt text-center">Спасибо за заказ!<br>
+			Информация о заказе направлена на почту.
+		</p>
+	</div>
+</div>
+
+<div class="loader-scis" v-if="responseLoader">
+	<img src="../assets/img/preloader.svg" alt="">
+</div>
+
 		<section id="inner">
 			<div class="container">
 				<h1>Заказ</h1>
 			</div>
-		</section>	
+		</section>
+
+
 		<section id="zakaz">
 			<div class="container">
-				<form >
+				<div v-if="localCart.length < 1">
+					<p class="white-txt"> Ваша корзина пуста</p>
+					<router-link tag="a" to="/catalog">
+						<button class="to-shop">В магазин</button>
+					</router-link>
+				</div>
+
+				<form v-if="localCart.length > 0">
 				<div class="col-lg-6">
 					<label for="">Имя <span>*</span></label>
 					<input type="text" :class="{errorInp : $v.name.$dirty && !$v.name.required}" v-model="name">
@@ -54,7 +77,8 @@
 				</form>
 			</div>
 		</section>
-		<section id="payment">
+
+		<section id="payment" v-if="localCart.length > 0" >
 			<div class="container">
 				<div class="col-lg-12">
 					<div class="pay-method">
@@ -78,7 +102,7 @@ import axios from 'axios'
 
 	export default{
 		computed: {
-			...mapState('goods', ['payment', 'cart', 'shipping']),
+			...mapState('goods', ['payment', 'cart', 'shipping', 'localCart']),
 		},
 		data() {
 			return {
@@ -91,7 +115,9 @@ import axios from 'axios'
 				district:'',
 				postIndex:'',
 				tel: '',
-				email:''
+				email:'',
+				showSpasibo: false,
+				responseLoader: false
 			}
 		},
 		validations: {
@@ -140,7 +166,7 @@ import axios from 'axios'
 					return;
 				}
 
-				alert('OK');
+				this.responseLoader = true;
 
 				let postArr = {
 					payment_method: this.payment.id,
@@ -169,7 +195,24 @@ import axios from 'axios'
 		          .post('https://zt.webink.site/wp-json/wc/v3/orders/?consumer_key=ck_1b3bd4c37269692bd10e544448eca18fee4765f2&consumer_secret=cs_292587791608de25be0fc86e4fc35f0d4dbaf0fb', postArr)
 		          .then(response =>{
 		            console.log(response)
-		            window.open("http://topzatochka.ru/", "_blank"); 
+		             
+
+		            var params1 = new URLSearchParams();
+					params1.append('action', 'get_paylink');
+					params1.append('order_id', response.data.id);
+		            
+		            axios
+		            .post('https://zt.webink.site/wp-admin/admin-ajax.php', params1)
+		            .then(response =>{
+		            	console.log(response.data)
+		            	this.responseLoader = false;
+		            	let newWin = window.open(response.data)
+		            	if(newWin !== null){
+		            		this.showSpasibo = true
+		            	}
+		            })
+		            .catch(error => console.log(error))
+
 		          })
 		          .catch(error => console.log(error))
 			}
@@ -178,6 +221,43 @@ import axios from 'axios'
 </script>
 
 <style scoped>
+.spasibo-pop{
+	height: 100vh;
+	width: 100vw;
+	background-color: rgba(0,0,0,.6);
+	position: fixed;
+	z-index: 40;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.loader-scis{
+	height: 100vh;
+	width: 100vw;
+	background-color: rgba(0,0,0,.7);
+	position: fixed;
+	z-index: 40;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.loader-scis img{
+	height: 80px;
+	animation: pulse 1s infinite;
+	transition:all .2s ease-in-out;
+}
+.spasibo{
+	width: 320px;
+	padding: 25px 25px;
+	background-color: #252525;
+	border-radius: 10px;
+}
+.spasibo img{
+	height: 25px;
+}
+.spasibo p{
+	margin-bottom: 0;
+}
 #inner{
 	padding: 150px 0;
 	background-color: #252525;
@@ -230,5 +310,30 @@ label span{
 	margin: 0;
 	background-color: #dfdcde;
 	border-radius: 5px;
+}
+@keyframes pulse {
+	0% {
+		transform: scale(0.95);
+	}
+
+	70% {
+		transform: scale(1.4);
+	}
+
+	100% {
+		transform: scale(0.95);
+	}
+}
+.to-shop{
+	padding: 15px 50px;
+	border-radius: 50px;
+	color: #fff;
+	font-size: 18px;
+	background-color: #9D7044;
+	border: 2px #9D7044 solid;
+	transition: all .3s ease-in-out;
+}
+.to-shop:hover{
+	background-color: transparent;
 }
 </style>

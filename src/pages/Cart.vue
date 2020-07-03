@@ -47,7 +47,7 @@
 					<div class="col-lg-4">
 						<h3>Выберите тип удобной доставки:</h3>
 						<select name="" @change="onChangeShip()"  v-model="selected">
-							<option v-for="del in deliveryMethods" :value="del">{{del.title}}</option>
+							<option v-for="del in deliveryMethods" :value="del.id">{{del.title}}</option>
 						</select>
 					</div>
 					<div class="col-lg-4">
@@ -69,12 +69,12 @@ import {mapGetters} from 'vuex'
 	export default{
 		data(){
 			return{
-				selected: "0",
+				selected: 1,
 				selectedDel: 0
 			}
 		},
 		computed: {
-			...mapState('goods', ['localCart', 'deliveryMethods', 'cart']),
+			...mapState('goods', ['localCart', 'deliveryMethods', 'cart', 'shipping']),
 			...mapGetters('goods', ['getTotal'])
 		},
 		methods: {
@@ -92,8 +92,8 @@ import {mapGetters} from 'vuex'
 				this.$store.dispatch('goods/deliteQuant', index)
 			},
 			onChangeShip(){
-				this.selectedDel = parseInt(this.selected.settings.cost.value)
-				this.$store.dispatch('goods/setShipping', this.selected)
+				this.selectedDel = parseInt(this.deliveryMethods.find(item => item.id === this.selected).settings.cost.value)
+				this.$store.dispatch('goods/setShipping', this.deliveryMethods.find(item => item.id === this.selected))
 			}
 		},
 		created(){

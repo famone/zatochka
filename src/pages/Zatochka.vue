@@ -82,7 +82,6 @@ export default{
                 });
         	},
 		yaMapInit() { 
-			console.log('123 YAINIT');
 			this.SuggestView = new ymaps.SuggestView('suggest');
 			this.SuggestView.value = this.emailBody.padress
 		}
@@ -101,7 +100,7 @@ export default{
 	},
 	destroyed() {
 		document.head.querySelector('script#ymaps').remove()
-		// ymaps = null
+		ymaps = null
 	}
 }
 

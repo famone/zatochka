@@ -21,7 +21,8 @@
 				</div>
 			</div>
 		</div>
-		<yandex-map 
+
+<!-- 		<yandex-map 
     :coords="cntr"
     :zoom="14"
     :scroll-zoom="false" 
@@ -32,27 +33,49 @@
       marker-id="123"  
       :icon="markerIcon"
     />
-  </yandex-map>
+
+  </yandex-map> -->
+
+ <div id="map"></div> 
 	</section>
   
 </template>
 
 <script>
-import { yandexMap, ymapMarker } from 'vue-yandex-maps'
+// import { yandexMap, ymapMarker } from 'vue-yandex-maps'
 
 	export default {
-  data: () => ({
-    coords: [
-      59.925317,
-      30.361709,
-    ],
-    cntr: [59.922504, 30.339796],
-    markerIcon: {
-      layout: 'default#imageWithContent',
-      imageHref: 'https://image.flaticon.com/icons/svg/787/787433.svg',
-      imageSize: [50, 50]
-    }
-  })
+		methods: {
+			yaMapInit2() { 
+				var myMap2 = new ymaps.Map("map", {
+		            center: [59.922504, 30.339796],
+		            zoom: 14
+
+		        });
+
+		        myMap2.geoObjects.add(new ymaps.Placemark([59.925317,30.361709], {
+		            hintContent: 'Собственный значок метки',
+		            balloonContent: 'Это красивая метка'
+		        }, {
+		            iconLayout: 'default#image',
+		            iconImageHref: 'https://image.flaticon.com/icons/svg/787/787433.svg',
+		            iconImageSize: [50, 50],
+		        
+		        }))
+			}
+		},
+		created() { 
+			const script = document.createElement('script')
+
+			script.onload = () => {
+			ymaps.ready(() => this.yaMapInit2());
+
+			};
+
+			script.id = 'ymaps'
+			script.src = "https://api-maps.yandex.ru/2.1/?apikey=8c4059db-3b8d-4535-a15e-569ee80fc827&lang=ru_RU"
+			document.head.append(script);
+		}
 };
 </script>
 
@@ -61,7 +84,7 @@ import { yandexMap, ymapMarker } from 'vue-yandex-maps'
 	padding: 150px 0;
 	position:relative;
 }
-.ymap-container {
+#map{
   height: 100%;
   position: absolute;
   top: 0;

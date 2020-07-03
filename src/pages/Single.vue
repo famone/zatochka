@@ -85,7 +85,6 @@ import axios from 'axios'
 		},
 		methods: {
 			addToCart(){
-				alert('Товар успешно добавлен в корзину!')
 				let newItem = this.goods.find(item => item.slug == this.$route.params.id)
 				let goodItem = {
 				product_id: newItem.id,

@@ -5,7 +5,7 @@
 			<swiper-slide v-for="slide in mySlides" :style="{'background-image': 'url(' + slide.bgImg + ')'}">
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-7">
+						<div class="col-lg-7 slider-mobile-row">
 							<h1 data-swiper-parallax="-600">{{slide.title}}</h1>
 							<p class="subheader" data-swiper-parallax="-300" v-html="slide.description"></p>
 							<button class="big-btn" data-swiper-parallax="-200">В магазин</button>

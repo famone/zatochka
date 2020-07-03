@@ -1,4 +1,5 @@
 <template>
+	<div>
 	<nav>
 		<div class="container">
 			<div class="shapka">
@@ -32,9 +33,32 @@
 					<img src="../assets/img/cartic.svg" alt="">
 				</router-link tag="div" to="/cart">
 
+				<div class="mobile-menu hidden-lg hidden-md" @click="mobileMenu = !mobileMenu" :class="{mobileActive: mobileMenu}">
+					<span></span>
+					<span></span>
+				</div>
+
 			</div>
 		</div>
 	</nav>
+
+				<div class="menu-sidebar hidden-md hidden-lg" v-if="mobileMenu">
+					<ul class="main-menu" @click="mobileMenu = !mobileMenu">
+						<router-link tag="li" to="/" active-class="active-page" exact>
+				        	<a>Главная</a>
+				        </router-link>
+				        <router-link tag="li"  to="/catalog" active-class="active-page">
+	           				<a>Каталог</a>
+	          			</router-link>
+	          			<router-link tag="li"  to="/zatochka" active-class="active-page">
+	           				<a>Заточка инструмента</a>
+	          			</router-link>
+	          			<router-link tag="li"  to="/contacts" active-class="active-page">
+	           				<a>Контакты</a>
+	          			</router-link>	
+					</ul>
+				</div>
+	</div>	
 </template>
 
 <script>
@@ -43,11 +67,75 @@ import {mapState} from 'vuex'
 export default{
 	computed:{
 		...mapState('goods', ['localCart'])
+	},
+	data(){
+		return{
+			mobileMenu: false
+		}
 	}
 }
 </script>
 
 <style scoped>
+.menu-sidebar{
+	position: absolute;
+	left: 0;
+	top: 110px;
+	height: calc(100vh - 90px);
+	width: 100% ;
+	background-color: #131313;
+	z-index: 200;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.menu-sidebar ul li{
+	display: block;
+	text-align: center;
+	margin-right: 0;
+	margin-bottom: 10px;
+	font-size: 20px;
+}
+.menu-sidebar ul li a{
+	font-size: 20px;
+}
+.mobile-menu{
+	height: 50px;
+	width: 50px;
+	position: relative;
+	z-index: 45;
+}
+.mobile-menu span:first-child{
+	content: '';
+	position: absolute;
+	top: 15px;
+	left: 5px;
+	width: 40px;
+	height: 4px;
+	border-radius: 4px;
+	background-color: #9D7044;
+	transition: all .2s ease-in-out;
+}
+.mobile-menu span:last-child{
+	content: '';
+	position: absolute;
+	bottom: 15px;
+	right: 5px;
+	width: 30px;
+	height: 4px;
+	border-radius: 4px;
+	background-color: #9D7044;
+	transition: all .2s ease-in-out;
+}
+.mobileActive span:first-child{
+	transform: rotate(135deg);
+	top:23px;
+}
+.mobileActive span:last-child{
+	transform: rotate(-135deg);
+	width: 40px;
+	bottom: 23px;
+}
 nav{
 	position: absolute;
 	width: 100%;

@@ -117,10 +117,17 @@ nav:before{
 		color: #fff;
 	}
 	.slider2 h1{
-		font-size: 35px;
+		font-size: 30px;
 	}
 	.box h2{
 		font-size: 30px;
+	}
+	.slider2 .slider-mobile-row{
+		padding-right: 50px!important;
+    	padding-left: 50px!important;
+	}
+	#inner h1{
+		font-size: 45px!important;
 	}
 }
 @media (max-width: 390px) {
