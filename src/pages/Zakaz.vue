@@ -206,7 +206,7 @@ import axios from 'axios'
 		            .then(response =>{
 		            	console.log(response.data)
 		            	this.responseLoader = false;
-		            	let newWin = window.open(response.data)
+		            	let newWin = window.location = response.data
 		            	if(newWin !== null){
 		            		this.showSpasibo = true
 		            	}
