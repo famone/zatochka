@@ -8,6 +8,7 @@
 						<option value="Все">Все</option>
 						<option value="Щипцы/кусачки">Щипцы/кусачки</option>
 						<option value="Маникюрные ножницы">Маникюрные ножницы</option>
+						<option value="Пушеры">Пушеры</option>
 					</select>
 					
 				</div>
