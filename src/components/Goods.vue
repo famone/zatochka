@@ -88,6 +88,9 @@ export default{
 .good-imgbox:hover{
 	background-color: #A1A1A1;
 }
+.good-box img{
+	height: 260px;
+}
 .sale-bage{
 	position:absolute;
 	height: 35px;
