@@ -48,7 +48,7 @@ export default {
   background-color: #252525;
   border-radius: 7px;
   color: #fff;
-  top: 25px;
+  top: 45px;
   right: 25px;
  /* transform: translateX(200px);*/
 }

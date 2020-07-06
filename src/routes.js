@@ -6,6 +6,7 @@ import Catalog from './pages/Catalog.vue'
 import Contacts from './pages/Contacts.vue'
 import Cart from './pages/Cart.vue'
 import Zakaz from './pages/Zakaz.vue'
+import Vozvrat from './pages/Vozvrat.vue'
 
 export default new VueRouter({
 	routes: [
@@ -36,6 +37,10 @@ export default new VueRouter({
 		{
 			path: '/checkout',
 			component: Zakaz
+		},
+		{
+			path: '/vozvrat',
+			component: Vozvrat
 		}
 	],
 	mode: 'history',

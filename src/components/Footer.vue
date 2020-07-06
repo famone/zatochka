@@ -7,31 +7,33 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-3">
+				<div class="col-lg-3 col-sm-6">
 					<h5>ИНН/ КПП:</h5>
 					<p class="grey-txt">12332142/ 12312412</p>
 					<h5>ЮР.АДРЕС:</h5>
-					<p class="grey-txt">Санкт-Петербург, м.Площадь Восстания, Лиговский пр-кт 50к3</p>
+					<p class="grey-txt">Санкт-Петербург, <br> м.Площадь Восстания, <br>Лиговский пр-кт 50к3</p>
 				</div>
-				<div class="col-lg-3">
+				<div class="col-lg-3 col-sm-12">
 					<h5>МЕНЮ</h5>
 					<ul class="footer-menu">
 						<router-link tag="li" to="/catalog">Каталог</router-link>
 						<router-link tag="li" to="/zatochka">Заточка инструмента</router-link>
 						<router-link tag="li" to="/contacts">Контакты</router-link>
 						<router-link tag="li" to="/cart">Корзина</router-link>
+						<router-link tag="li" to="/vozvrat">Возврат</router-link>
 					</ul>
 				</div>
-				<div class="col-lg-3">
+				<div class="col-lg-3 col-sm-6">
 					<h5>КОНТАКТЫ</h5>
 					<ul class="footer-menu">
 						<li><a href="tel:+79999871006">+7 999 987 10 06</a></li>
-						<li><a href="mailto:topzatochka@gmail.com">topzatochka@gmail.com</a></li>
+						<li><a href="mailto:info@topzatochka.ru">info@topzatochka.ru</a></li>
+						<li><a href="mailto:opt@topzatochka.ru">opt@topzatochka.ru</a></li>
 						<li><a href="https://www.instagram.com/topzatochka_spb/">Instagram</a></li>
 						<li><a href="https://vk.com/topzatochka">Vkontakte</a></li>
 					</ul>
 				</div>
-				<div class="col-lg-3">
+				<div class="col-lg-3 col-sm-6">
 					<h5>ОСТАВЬТЕ ЗАЯВКУ</h5>
 					<form action="">
 						<input type="text" v-model="emailBody.phone" placeholder="+7 (___) ___-__-__" v-mask="'+7 (###) ###-##-##'">
@@ -120,7 +122,7 @@ h5{
 	color: #8B8B8B;
 	font-size: 16px;
 	font-weight: 400;
-	margin-bottom: 10px;
+	margin-bottom: 7px;
 	padding:2px 0;
 	transition: all .3s ease-in-out;
 }
@@ -167,7 +169,7 @@ input{
 	color: #fff;
 	font-size: 15px;
 	transition: all .3s ease;
-	margin-top: 60px;
+	margin-top: 80px;
 }
 .webink a{
 	color: #fff;

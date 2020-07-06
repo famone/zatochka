@@ -42,7 +42,7 @@
 		</div>
 	</nav>
 
-				<div class="menu-sidebar hidden-md hidden-lg" v-if="mobileMenu">
+				<div class="menu-sidebar hidden-md hidden-lg" :class="{menuSbAc : mobileMenu}">
 					<ul class="main-menu" @click="mobileMenu = !mobileMenu">
 						<router-link tag="li" to="/" active-class="active-page" exact>
 				        	<a>Главная</a>
@@ -79,19 +79,19 @@ export default{
 <style scoped>
 .menu-sidebar{
 	position: absolute;
-	left: 0;
-	top: 110px;
-	height: calc(100vh - 90px);
-	width: 100% ;
-	background-color: #131313;
+	left: -80%;
+	top: 0;
+	height: 100vh;
+	width: 80%;
+	background-color: #131313f5;
 	z-index: 200;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	transition: all .3s ease-in-out
 }
 .menu-sidebar ul li{
 	display: block;
-	text-align: center;
 	margin-right: 0;
 	margin-bottom: 10px;
 	font-size: 20px;
@@ -135,6 +135,9 @@ export default{
 	transform: rotate(-135deg);
 	width: 40px;
 	bottom: 23px;
+}
+.menuSbAc{
+	left: 0%;
 }
 nav{
 	position: absolute;
