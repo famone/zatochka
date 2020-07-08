@@ -22,6 +22,15 @@
           			</router-link>	
 				</ul>
 
+				<div class="social-links">
+					<a href="https://www.instagram.com/topzatochka_spb/">
+						<img src="../assets/img/inst.svg">
+					</a>
+					<a href="https://vk.com/topzatochka">
+						<img src="../assets/img/vk.svg">
+					</a>
+				</div>
+
 				<div class="tel hidden-sm hidden-xs">
 					<a href="tel:+ 79999871006">+ 7 999 987 10 06</a>
 				</div>
@@ -77,6 +86,21 @@ export default{
 </script>
 
 <style scoped>
+.social-links{
+	position: relative;
+	z-index: 20;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+}
+.social-links img{
+	height: 25px;
+	margin-right: 10px;
+	transition: all .3s ease-in-out;
+}
+.social-links img:hover{
+	opacity: .6;
+}
 .menu-sidebar{
 	position: absolute;
 	left: -80%;
