@@ -41,7 +41,8 @@
 				<div class="row total" v-if="localCart.length > 0">
 					<div class="col-lg-4">
 						<h3>Итого:</h3>
-						<h4 class="total-price">{{(selectedDel + getTotal).toLocaleString()}} руб.</h4>
+						<h4 class="total-price">{{(selectedDel + getTotal.total).toLocaleString()}} руб.</h4>
+						<p class="sale" v-if="getTotal.sale > 0">Cкидка 10%</p>
 						<p class="grey-txt">C учетом стоимости доставки</p>
 					</div>
 					<div class="col-lg-4">
@@ -76,6 +77,7 @@ import {mapGetters} from 'vuex'
 		computed: {
 			...mapState('goods', ['localCart', 'deliveryMethods', 'cart', 'shipping']),
 			...mapGetters('goods', ['getTotal'])
+
 		},
 		methods: {
 			removeFromCart(index){
@@ -103,6 +105,11 @@ import {mapGetters} from 'vuex'
 </script>
 
 <style scoped>
+.sale{
+	color: #9D7044;
+	font-size: 22px;
+	margin: 0;
+}
 #inner{
 	padding: 150px 0;
 	background-color: #252525;

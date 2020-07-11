@@ -116,7 +116,6 @@ const goods = {
 	  		axios
 	  			.get('https://zt.webink.site/wp-json/wc/v2/products/?consumer_key=ck_1b3bd4c37269692bd10e544448eca18fee4765f2&consumer_secret=cs_292587791608de25be0fc86e4fc35f0d4dbaf0fb&per_page=50')
 	  			.then(response =>{
-	  				console.log(response.data)
 	  				commit('SET_GOODS', response.data)
 	  			})
 	  			.catch(error => console.log(error))
@@ -131,7 +130,6 @@ const goods = {
 	  		axios
 	  			.get('https://zt.webink.site/wp-json/wc/v3/shipping/zones/1/methods?consumer_key=ck_1b3bd4c37269692bd10e544448eca18fee4765f2&consumer_secret=cs_292587791608de25be0fc86e4fc35f0d4dbaf0fb')
 	  			.then(response =>{
-            console.log(response.data)
 	  				commit('SET_DEL', response.data)
 	  			})
 	  			.catch(error => console.log(error))
@@ -152,7 +150,6 @@ const goods = {
         axios
           .get('https://zt.webink.site/wp-json/wc/v3/payment_gateways?consumer_key=ck_1b3bd4c37269692bd10e544448eca18fee4765f2&consumer_secret=cs_292587791608de25be0fc86e4fc35f0d4dbaf0fb')
           .then(response =>{
-            console.log(response.data.find(item => item.enabled === true))
             commit('SET_PAYMENT', response.data.find(item => item.enabled === true))
           })
           .catch(error => console.log(error))
@@ -167,15 +164,29 @@ const goods = {
   			return state.goods.find(goodItem => goodItem.slug == slug)
   		},
   		getTotal(state){
-  			let total = 0;
+        let totalPr = {
+          total: 0,
+          sale: 0
+        }
+
 
   			state.localCart.forEach(item =>{
-  				total += parseInt(item.price)
+  				totalPr.total += parseInt(item.price)
   			})
 
-  			return total
+        if(totalPr.total > 5000){
+          totalPr.sale = totalPr.total * 0.1
+          totalPr.total = totalPr.total - totalPr.sale
+        }else {
+          totalPr.sale = 0
+          totalPr.total = totalPr.total - totalPr.sale
+        }
+
+  			return totalPr
   		}
 	}
 }
 
 export default goods
+
+

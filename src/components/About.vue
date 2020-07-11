@@ -16,7 +16,9 @@
 				</a>
 			</div>
 			<div class="col-lg-6 scissors hidden-xs hidden-sm">
-				
+				<video autoplay muted loop id="myVideo">
+                	<source src="https://zt.webink.site/wp-content/uploads/2020/07/tpztchka.mp4.mp4" type="video/mp4">
+              </video>
 			</div>
 			</div>
 		</div>
@@ -36,11 +38,20 @@
 	padding: 120px 15px!important;
 }
 .scissors{
-	background-image: url(../assets/img/sccissorsbg.png);
+/*	background-image: url(../assets/img/sccissorsbg.png);
 	-webkit-background-size: cover;
 	background-size: cover;
 	background-position: center bottom;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat;*/
 	height: 650px;
+	overflow: hidden;
+	position: relative;
 }
+  #myVideo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+  }
 </style>
