@@ -15,7 +15,7 @@
            				<a>Каталог</a>
           			</router-link>
           			<router-link tag="li"  to="/zatochka" active-class="active-page">
-           				<a>Заточка инструмента</a>
+           				<a>Заказ курьера</a>
           			</router-link>
           			<router-link tag="li"  to="/contacts" active-class="active-page">
            				<a>Контакты</a>

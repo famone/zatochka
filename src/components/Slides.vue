@@ -9,7 +9,7 @@
 							<h1 data-swiper-parallax="-600">{{slide.title}}</h1>
 							<p class="subheader" data-swiper-parallax="-300" v-html="slide.description"></p>
 							<router-link tag="a" :to="slide.slug">
-								<button class="big-btn" data-swiper-parallax="-200">В магазин</button>
+								<button class="big-btn" data-swiper-parallax="-200">{{slide.slideBtn}}</button>
 							</router-link>
 						</div>
 					</div>
@@ -59,14 +59,16 @@
 			      			description: 'ТОPZATOCHKA предлагаем Вам профессиональные <br> инструменты с ручной заточкой по доступным ценам!',
 			      			bgImg: require('../assets/img/sl1.jpg'),
 			      			float: require('../assets/img/bigscs.png'),
-			      			slug: '/catalog'
+			      			slug: '/catalog',
+			      			slideBtn: 'В магазин'
 			      		},
 			      		{
 			      			title: 'Профессиональная заточка инструмента ',
 			      			description: 'Наша студия специализируется на заточке маникюрного и парикмахерского инструмента.',
 			      			bgImg: require('../assets/img/zat.png'),
 			      			float: false,
-			      			slug: '/zatochka'
+			      			slug: '/zatochka',
+			      			slideBtn: 'Заказать курьера'
 			      		}
 			      ]
 			}

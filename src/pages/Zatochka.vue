@@ -2,12 +2,12 @@
 	<div>
 		<section id="inner">
 			<div class="container">
-				<h1>Заточка инструмента</h1>
+				<h1>Заказ курьера</h1>
 			</div>
 		</section>	
 		<section id="ztchka">
 			<div class="container">
-				<div class="col-lg-6">
+					<div class="col-lg-12">
 					<div class="box">
 						<h2>Курьер приедет в удобное время и заберет заказ!</h2>
 					<p class="grey-txt">Заточенные инструменты вы получите обратно в этот же день.
@@ -18,16 +18,42 @@
 					</div>
 
 				</div>
-				<div class="col-lg-6">
-					<form action="">
-						<label for="">Имя <span>*</span></label>
-						<input type="text" v-model="emailBody.pname">
-						<label for="">Телефон <span>*</span></label>
-						<input type="text" v-mask="'+7 (###) ###-##-##'" v-model="emailBody.phone">
-						<label for="">Адрес вызова курьера <span>*</span></label>
-						<input type="text" @change="changeAddr()" id="suggest">
-						<button type="submit" @click.prevent="submitForm()">Заказать курьера</button>
+				<div class="col-lg-12">
+					<div class="row">
+						<form action="">
+						<div class="col-lg-6">
+							<label for="">Ваше Имя и Фамилия <span>*</span></label>
+							<input type="text" v-model="emailBody.pname">
+						</div>
+						<div class="col-lg-6">
+							<label for="">Телефон <span>*</span></label>
+							<input type="text" v-mask="'+7 (###) ###-##-##'" v-model="emailBody.phone">
+						</div>
+						<div class="col-lg-4">
+							<label for="">Адрес вызова курьера <span>*</span></label>
+							<input type="text" @change="changeAddr()" id="suggest">
+						</div>
+						<div class="col-lg-4">
+							<label for="">Ближайшее метро</label>
+							<input type="text" v-model="emailBody.subway">
+						</div>
+						<div class="col-lg-4">
+							<label for="">Дата и время приезда курьера</label>
+							<input type="text" v-model="emailBody.time">
+						</div>
+						<div class="col-lg-6">
+							<label for="">Количество инструментов</label>
+							<input type="text" v-model="emailBody.amount">
+						</div>
+						<div class="col-lg-6">
+							<label for="">Комментарий к заказу</label>
+							<input type="text" v-model="emailBody.comment">
+						</div>
+						<div class="col-lg-12">
+							<button type="submit" @click.prevent="submitForm()">Заказать курьера</button>
+						</div>
 					</form>
+					</div>
 					<div class="text-center" v-if="errors.message !== '' " :class="{green : errors.status === 'mail_sent'}">
 						<p class="resp-message">{{errors.message}}</p>
 					</div>
@@ -46,7 +72,11 @@ export default{
 			emailBody: {	
 				pname: '',
 				phone: '',
-				padress: ''
+				padress: '',
+				subway: '',
+				time: '',
+				amount: '',
+				comment: ''
 			},
 			errors: '',
 			url: 'https://zt.webink.site/wp-json/contact-form-7/v1/contact-forms/33/feedback'
@@ -73,7 +103,11 @@ export default{
                     	this.emailBody = {
 							pname: '',
 							phone: '',
-							padress: ''
+							padress: '',
+							subway: '',
+							time: '',
+							amount: '',
+							comment: ''
 						}
                     }
                 })
