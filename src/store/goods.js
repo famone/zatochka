@@ -114,7 +114,7 @@ const goods = {
 	 actions: {
 	  	loadGoods({commit}){
 	  		axios
-	  			.get('https://zt.webink.site/wp-json/wc/v2/products/?consumer_key=ck_1b3bd4c37269692bd10e544448eca18fee4765f2&consumer_secret=cs_292587791608de25be0fc86e4fc35f0d4dbaf0fb&per_page=50')
+	  			.get('https://topzatochka.ru//wp-json/wc/v2/products/?consumer_key=ck_1b3bd4c37269692bd10e544448eca18fee4765f2&consumer_secret=cs_292587791608de25be0fc86e4fc35f0d4dbaf0fb&per_page=50')
 	  			.then(response =>{
 	  				commit('SET_GOODS', response.data)
 	  			})
@@ -128,7 +128,7 @@ const goods = {
 	  	},
 	  	getDelivery({commit}){
 	  		axios
-	  			.get('https://zt.webink.site/wp-json/wc/v3/shipping/zones/1/methods?consumer_key=ck_1b3bd4c37269692bd10e544448eca18fee4765f2&consumer_secret=cs_292587791608de25be0fc86e4fc35f0d4dbaf0fb')
+	  			.get('https://topzatochka.ru/wp-json/wc/v3/shipping/zones/1/methods?consumer_key=ck_1b3bd4c37269692bd10e544448eca18fee4765f2&consumer_secret=cs_292587791608de25be0fc86e4fc35f0d4dbaf0fb')
 	  			.then(response =>{
 	  				commit('SET_DEL', response.data)
 	  			})
@@ -148,7 +148,7 @@ const goods = {
       },
       loadPayment({commit}){
         axios
-          .get('https://zt.webink.site/wp-json/wc/v3/payment_gateways?consumer_key=ck_1b3bd4c37269692bd10e544448eca18fee4765f2&consumer_secret=cs_292587791608de25be0fc86e4fc35f0d4dbaf0fb')
+          .get('https://topzatochka.ru/wp-json/wc/v3/payment_gateways?consumer_key=ck_1b3bd4c37269692bd10e544448eca18fee4765f2&consumer_secret=cs_292587791608de25be0fc86e4fc35f0d4dbaf0fb')
           .then(response =>{
             commit('SET_PAYMENT', response.data.find(item => item.enabled === true))
           })

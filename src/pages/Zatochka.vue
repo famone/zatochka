@@ -79,7 +79,7 @@ export default{
 				comment: ''
 			},
 			errors: '',
-			url: 'https://zt.webink.site/wp-json/contact-form-7/v1/contact-forms/33/feedback'
+			url: 'https://topzatochka.ru/wp-json/contact-form-7/v1/contact-forms/33/feedback'
 		}
 	},
 

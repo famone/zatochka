@@ -83,7 +83,7 @@
 				<div class="col-lg-12">
 					<div class="pay-method">
 						<img v-if="payment.id === 'tinkoff'"
-						 src="https://zt.webink.site/wp-content/plugins/tinkoff-woocommerce/tinkoff/tinkoff.png">
+						 src="https://topzatochka.ru/wp-content/plugins/tinkoff-woocommerce/tinkoff/tinkoff.png">
 						<h3 >{{payment.title}}</h3>
 						<p class="pay-box">{{payment.description}}</p>
 						<p>Ваши личные данные будут использоваться для обработки ваших заказов, упрощения вашей работы с сайтом и для других целей, описанных в нашей политика конфиденциальности.</p>
@@ -192,9 +192,9 @@ import axios from 'axios'
 
 				}
 		        axios
-		          .post('https://zt.webink.site/wp-json/wc/v3/orders/?consumer_key=ck_1b3bd4c37269692bd10e544448eca18fee4765f2&consumer_secret=cs_292587791608de25be0fc86e4fc35f0d4dbaf0fb', postArr)
+		          .post('https://topzatochka.ru/wp-json/wc/v3/orders/?consumer_key=ck_1b3bd4c37269692bd10e544448eca18fee4765f2&consumer_secret=cs_292587791608de25be0fc86e4fc35f0d4dbaf0fb', postArr)
 		          .then(response =>{
-		            console.log(response)
+		            //console.log(response)
 		             
 
 		            var params1 = new URLSearchParams();
@@ -202,9 +202,9 @@ import axios from 'axios'
 					params1.append('order_id', response.data.id);
 		            
 		            axios
-		            .post('https://zt.webink.site/wp-admin/admin-ajax.php', params1)
+		            .post('https://topzatochka.ru/wp-admin/admin-ajax.php', params1)
 		            .then(response =>{
-		            	console.log(response.data)
+		            	//console.log(response.data)
 		            	this.responseLoader = false;
 		            	let newWin = window.location = response.data
 		            	if(newWin !== null){
