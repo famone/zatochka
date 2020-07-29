@@ -11,7 +11,8 @@ const goods = {
 		loading: false,
     payment: {},
     shipping: {},
-    cartAlert: false
+    cartAlert: false,
+    zatockaPageInfo: ''
   	},
   	mutations: {
   		SET_GOODS(state, playload){
@@ -109,9 +110,20 @@ const goods = {
       },
       SET_SHIPPING(state, playload){
         state.shipping = playload
+      },
+      SET_ZAT_PAGE(state, playload){
+        state.zatockaPageInfo = playload;
       }
   	},
 	 actions: {
+    loadZatochkaPage({commit}){
+      axios
+      .get('https://topzatochka.ru/wp-json/wp/v2/pages/142')
+      .then(response =>{
+        // console.log(response.data.content.rendered)
+        commit('SET_ZAT_PAGE', response.data.content.rendered)
+      })
+    },
 	  	loadGoods({commit}){
 	  		axios
 	  			.get('https://zt.webink.site/wp-json/wc/v2/products/?consumer_key=ck_1b3bd4c37269692bd10e544448eca18fee4765f2&consumer_secret=cs_292587791608de25be0fc86e4fc35f0d4dbaf0fb&per_page=50')

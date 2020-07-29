@@ -97,7 +97,7 @@
 
 <script>
 import { required, email, minLength } from "vuelidate/lib/validators";
-import {mapState} from 'vuex'
+import {mapState} from 'vuex' 
 import axios from 'axios'
 
 	export default{

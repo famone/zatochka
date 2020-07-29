@@ -8,7 +8,7 @@
 		<section id="ztchka">
 			<div class="container">
 					<div class="col-lg-12">
-					<div class="box">
+					<div class="box" v-html="zatockaPageInfo">
 						<h2>Курьер приедет в удобное время и заберет заказ!</h2>
 					<p class="grey-txt">Заточенные инструменты вы получите обратно в этот же день.
 						<br><br>
@@ -64,9 +64,13 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import axios from 'axios'
 
 export default{
+	computed: {
+		...mapState('goods', ['zatockaPageInfo']),
+	},
 	data(){
 		return{
 			emailBody: {	
@@ -121,6 +125,11 @@ export default{
 		}
 	},
 	created() { 
+
+		this.$store.dispatch('goods/loadZatochkaPage');
+
+
+
 		const script = document.createElement('script')
 
 		script.onload = () => {
