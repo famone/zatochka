@@ -17,7 +17,7 @@
 			</div>
 			<div class="col-lg-6 scissors hidden-xs hidden-sm">
 				<video autoplay muted loop id="myVideo">
-                	<source src="https://zt.webink.site/wp-content/uploads/2020/07/tpztchka.mp4.mp4" type="video/mp4">
+                	<source src="https://topzatochka.ru/wp-content/uploads/2020/07/tpztchka.mp4" type="video/mp4">
               </video>
 			</div>
 			</div>
