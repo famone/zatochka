@@ -34,7 +34,7 @@ const goods = {
   			if(productInCart){
   				productInCart.quantity += playload.quantity;
   				productInCart.price = playload.price * (productInCart.quantity)
-  				return
+  				return 
   			}
 
 
