@@ -192,7 +192,7 @@ import axios from 'axios'
 
 				}
 		        axios
-		          .post('https://topzatochka.ru/wp-json/wc/v3/orders/?consumer_key=ck_1b3bd4c37269692bd10e544448eca18fee4765f2&consumer_secret=cs_292587791608de25be0fc86e4fc35f0d4dbaf0fb', postArr)
+		          .post('https://topzatochka.ru/wp-json/wc/v3/orders/?consumer_key=ck_502e371844b6616b9b267dd87237182265ab676d&consumer_secret=cs_4f98697b1fe1489286e79e07e862e6775f02a5af', postArr)
 		          .then(response =>{
 		            //console.log(response)
 		             
